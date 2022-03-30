@@ -77,7 +77,11 @@ const sectionCenter = document.querySelector('.section-center');
 
 window.addEventListener('DOMContentLoaded',function(){
   // console.log('shake and bake');
-  let displayMenu = menu.map(function(item){
+  displayMenuItem(menu);
+});
+
+function displayMenuItem(menuItems){
+  let displayMenu = menuItems.map(function(item){
     return `<article class="menu-item">
           <img src=${item.img} class="photo">
           <div class="item-info">
@@ -92,4 +96,4 @@ window.addEventListener('DOMContentLoaded',function(){
   displayMenu = displayMenu.join('');
   sectionCenter.innerHTML = displayMenu;
   console.log(displayMenu);
-});
+}
