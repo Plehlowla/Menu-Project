@@ -89,6 +89,16 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 window.addEventListener('DOMContentLoaded',function(){
   // console.log('shake and bake');
   displayMenuItem(menu);
+
+  const categories = menu.reduce(function(btns, item){
+    // return btns.category;
+    if(!btns.includes(item.category)){
+      btns.push(item.category);
+    }
+    return btns;
+
+  },['all']);
+  console.log(categories);
 });
 
 //filter items
