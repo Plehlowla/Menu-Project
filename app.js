@@ -82,14 +82,36 @@ const menu = [
 ];
 
 const sectionCenter = document.querySelector('.section-center');
-
-const filterBtns = document.querySelectorAll('.filter-btn');
+const container = document.querySelector('.btn-container');
 
 //load items
 window.addEventListener('DOMContentLoaded',function(){
   // console.log('shake and bake');
   displayMenuItem(menu);
+  displayMenuButtons(menu);
+});
 
+//display menu
+function displayMenuItem(menuItems){
+  let displayMenu = menuItems.map(function(item){
+    return `<article class="menu-item">
+          <img src=${item.img} class="photo">
+          <div class="item-info">
+            <header>
+              <h4>${item.title}</h4>
+              <h4 class="price">${item.price}</h4>
+            </header>
+            <p>${item.desc}</p>
+            </div>
+        </article>`;
+  });
+  displayMenu = displayMenu.join('');
+  sectionCenter.innerHTML = displayMenu;
+  // console.log(displayMenu);
+}
+
+//display buttons
+function displayMenuButtons(){
   const categories = menu.reduce(function(btns, item){
     // return btns.category;
     if(!btns.includes(item.category)){
@@ -98,10 +120,16 @@ window.addEventListener('DOMContentLoaded',function(){
     return btns;
 
   },['all']);
-  console.log(categories);
-});
+  // console.log(categories);
+  const categoryBtns = categories.map(function(category){
+    return `<button class="filter-btn" type="button" data-id=${category}>${category}</button>`;
+  }).join('');
+  // console.log(categoryBtns);
+  container.innerHTML = categoryBtns;
 
-//filter items
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  
+  //filter items
 filterBtns.forEach(function(btn){
   btn.addEventListener('click',function(e){
     const category = e.currentTarget.dataset.id;
@@ -121,22 +149,4 @@ filterBtns.forEach(function(btn){
     }
   });
 });
-
-
-function displayMenuItem(menuItems){
-  let displayMenu = menuItems.map(function(item){
-    return `<article class="menu-item">
-          <img src=${item.img} class="photo">
-          <div class="item-info">
-            <header>
-              <h4>${item.title}</h4>
-              <h4 class="price">${item.price}</h4>
-            </header>
-            <p>${item.desc}</p>
-            </div>
-        </article>`;
-  });
-  displayMenu = displayMenu.join('');
-  sectionCenter.innerHTML = displayMenu;
-  // console.log(displayMenu);
-}
+};
